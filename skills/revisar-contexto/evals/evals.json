@@ -1,0 +1,63 @@
+{
+  "skill_name": "revisar-contexto",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "faz uma revisão de contexto do projeto, fechamos a fase 2",
+      "expected_output": "Resposta no formato Revisão de contexto, com achados por severidade, sem rodar build nem alterar arquivos.",
+      "assertions": [
+        {
+          "name": "titulo",
+          "type": "contains",
+          "value": "Revisão de contexto",
+          "description": "titulo"
+        },
+        {
+          "name": "severidades",
+          "type": "contains_any",
+          "values": [
+            "Crítico",
+            "Importante",
+            "Leve"
+          ],
+          "description": "severidades"
+        },
+        {
+          "name": "pergunta_final",
+          "type": "contains",
+          "value": "Quer que eu prepare",
+          "description": "pergunta final"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "(ROADMAP com P0 'App mobile' sem nenhuma tarefa no PROGRESSO) revisa o contexto",
+      "expected_output": "Propõe item em Próximos Passos para o P0 do roadmap sem tarefa.",
+      "assertions": [
+        {
+          "name": "item_proposto",
+          "type": "contains",
+          "value": "Itens propostos para Próximos Passos",
+          "description": "item proposto"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "(tudo coerente) revisa o contexto",
+      "expected_output": "Diz que está coerente, sem inventar achados.",
+      "assertions": [
+        {
+          "name": "coerente",
+          "type": "contains_any",
+          "values": [
+            "coerente",
+            "Nenhum."
+          ],
+          "description": "coerente"
+        }
+      ]
+    }
+  ]
+}

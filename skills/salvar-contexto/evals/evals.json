@@ -1,0 +1,50 @@
+{
+  "skill_name": "salvar-contexto",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "salva o contexto, vou encerrar",
+      "expected_output": "Mostra o bloco de checkpoint com data e hora e pede confirmação antes de gravar.",
+      "assertions": [
+        {
+          "name": "checkpoint",
+          "type": "contains",
+          "value": "Checkpoint salvo em",
+          "description": "checkpoint"
+        },
+        {
+          "name": "pede_confirmacao",
+          "type": "contains",
+          "value": "Confirma",
+          "description": "pede confirmacao"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "(🔄 Em Andamento contém '- [ ] Integração do PIX no checkout') salva onde parei",
+      "expected_output": "Preserva o item formal existente acima do novo checkpoint.",
+      "assertions": [
+        {
+          "name": "preserva_item",
+          "type": "contains",
+          "value": "Integração do PIX no checkout",
+          "description": "preserva item"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "(sessão em que o webhook foi escrito mas nenhum teste rodou) registra o progresso",
+      "expected_output": "Webhook vai para 'Em meio de edição', não para 'Feito nesta sessão'.",
+      "assertions": [
+        {
+          "name": "em_meio",
+          "type": "contains",
+          "value": "Em meio de edição",
+          "description": "em meio"
+        }
+      ]
+    }
+  ]
+}

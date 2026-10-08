@@ -1,0 +1,65 @@
+{
+  "skill_name": "concluir-tarefa",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "terminei a integração do PIX, fecha a tarefa",
+      "expected_output": "Roda build e testes, faz a varredura completa e mostra o preview com Concluído, Próximos Passos, CHANGELOG e a lista de docs conferidos, pedindo confirmação.",
+      "assertions": [
+        {
+          "name": "preview_docs",
+          "type": "contains_any",
+          "values": [
+            "Conferido e sem mudança",
+            "conferidos"
+          ],
+          "description": "preview docs"
+        },
+        {
+          "name": "desdobramentos",
+          "type": "contains",
+          "value": "Próximos Passos",
+          "description": "desdobramentos"
+        },
+        {
+          "name": "pede_confirmacao",
+          "type": "contains",
+          "value": "Confirma a conclusão",
+          "description": "pede confirmacao"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "(build falhando) conclui a tarefa do relatório de vendas",
+      "expected_output": "Para no passo 1, mostra o erro e não move o item.",
+      "assertions": [
+        {
+          "name": "nao_move",
+          "type": "not_contains",
+          "value": "Tarefa movida para ✅ Concluído",
+          "description": "nao move"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "(item concluído: 'Migração de clientes 2/4 concluída') fecha essa etapa",
+      "expected_output": "Abre itens para 3/4 e 4/4 em Próximos Passos.",
+      "assertions": [
+        {
+          "name": "abre_3_4",
+          "type": "contains",
+          "value": "3/4",
+          "description": "abre 3 4"
+        },
+        {
+          "name": "abre_4_4",
+          "type": "contains",
+          "value": "4/4",
+          "description": "abre 4 4"
+        }
+      ]
+    }
+  ]
+}

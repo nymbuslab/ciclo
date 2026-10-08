@@ -1,0 +1,75 @@
+{
+  "skill_name": "iniciar-sessao",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "onde paramos?",
+      "expected_output": "Briefing no formato da skill, com Em andamento, Pendências priorizadas e Sugestão para iniciar, sem regras globais repetidas e sem rodar build ou testes.",
+      "assertions": [
+        {
+          "name": "titulo_briefing",
+          "type": "contains",
+          "value": "Briefing de sessão",
+          "description": "titulo briefing"
+        },
+        {
+          "name": "tem_sugestao",
+          "type": "contains",
+          "value": "Sugestão para iniciar",
+          "description": "tem sugestao"
+        },
+        {
+          "name": "sem_build",
+          "type": "not_contains",
+          "value": "npm run build",
+          "description": "sem build"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "(repositório com src/pagamento/pix.ts modificado e 🔄 Em Andamento vazia) o que falta?",
+      "expected_output": "Aponta a divergência: arquivo modificado sem item em andamento, como alerta importante.",
+      "assertions": [
+        {
+          "name": "aponta_divergencia",
+          "type": "contains_any",
+          "values": [
+            "Divergências",
+            "divergência"
+          ],
+          "description": "aponta divergencia"
+        },
+        {
+          "name": "cita_arquivo",
+          "type": "contains",
+          "value": "pix.ts",
+          "description": "cita arquivo"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "(repositório sem PROGRESSO.md) vamos começar",
+      "expected_output": "Avisa que falta PROGRESSO.md, explica para que serve e propõe o template mínimo sem criar o arquivo.",
+      "assertions": [
+        {
+          "name": "avisa_ausencia",
+          "type": "contains",
+          "value": "PROGRESSO.md",
+          "description": "avisa ausencia"
+        },
+        {
+          "name": "pede_aprovacao",
+          "type": "contains_any",
+          "values": [
+            "aprova",
+            "Posso criar",
+            "confirma"
+          ],
+          "description": "pede aprovacao"
+        }
+      ]
+    }
+  ]
+}
